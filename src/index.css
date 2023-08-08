@@ -1,13 +1,30 @@
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap');
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  height: 100vh;
+  font-family: 'Open Sans', sans-serif;
+  /* font-family: 'Press Start 2P', cursive; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background: rgb(212,63,231);
+  background: -moz-linear-gradient(90deg, rgba(212,63,231,1) 1%, rgba(178,6,200,0.5354516806722689) 36%, rgba(0,212,255,0.6783088235294117) 66%, rgba(151,215,228,0.6783088235294117) 97%);
+  background: -webkit-linear-gradient(90deg, rgba(212,63,231,1) 1%, rgba(178,6,200,0.5354516806722689) 36%, rgba(0,212,255,0.6783088235294117) 66%, rgba(151,215,228,0.6783088235294117) 97%);
+  background: linear-gradient(90deg, rgba(212,63,231,1) 1%, rgba(178,6,200,0.5354516806722689) 36%, rgba(0,212,255,0.6783088235294117) 66%, rgba(151,215,228,0.6783088235294117) 97%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d43fe7",endColorstr="#97d7e4",GradientType=1); */
+  background: linear-gradient(to bottom, rgba(0,212,255,0.6783088235294117), rgba(178,6,200,0.5354516806722689));
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.Home, 
+.quiz {
+  width: 100%;
+}
+
+.card {
+  border: none!important;
+}
+
+.card .card-body input,
+.card .card-body select {
+  background-color: transparent;
 }
