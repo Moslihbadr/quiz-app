@@ -1,6 +1,8 @@
-const Play = () => {
+const Play = ({ API }) => {
   return (
-    <div>Play</div>
+    <div>
+      {API}
+    </div>
   )
 }
 

@@ -1,16 +1,51 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
+const Configuration = ({ setAPI }) => {
 
-const Configuration = () => {
-  
-  const [ categories, setCategories ] = useState([])
-  
+  const [categories, setCategories] = useState([]);
+  const [formData, setFormData] = useState(
+    {
+      amount:10,
+      category: '',
+      difficulty: '',
+      type: ''
+    }
+  );
+
+  const navigate = useNavigate()
+
   useEffect(() => {
-    fetch('https://opentdb.com/api_category.php')
-    .then(response => response.json())
-    .then(data => setCategories(data.trivia_categories))
-  }, [])
+    fetch("https://opentdb.com/api_category.php")
+      .then((response) => response.json())
+      .then((data) => setCategories(data.trivia_categories));
+  }, []);
+
+  const handleChange = (event) => {
+    const {name, value} = event.target
+      setFormData(prevFormData => {
+          return {
+              ...prevFormData,
+              [name]:  value
+          }
+      })
+    }
+
+    const handleSubmit = (event) => {
+      event.preventDefault()
+      const { amount, category, difficulty, type } = formData
+
+      const amountURL = `amount=${amount}&` 
+      const categoryURL = category && `category=${category}&` 
+      const difficultyURL = difficulty && `difficulty=${difficulty}&` 
+      const typeURL = type && `type=${type}` 
+
+      setAPI( `https://opentdb.com/api.php?${amountURL}${categoryURL}${difficultyURL}${typeURL}`)
+
+      // Navigate to the Play component
+      navigate("/quiz/play")
+
+    }
 
   return (
     <div className="configuration mt-5">
@@ -18,52 +53,66 @@ const Configuration = () => {
         <h1 className="text-center mb-4">Quiz Configuration</h1>
         <div className="card mx-auto bg-transparent">
           <div className="card-body">
-          <form>
-            <div className="mb-3">
-              <label htmlFor="number-of-questions" className="form-label">Number of Questions :</label>
-              <input type="number" min={1} max={50} name="amount" className="form-control" id="number-of-questions" />
-            </div> 
-            <div className="mb-3">
-              <label htmlFor="category" className="form-label">Select Category :</label>
-              {
-                <select className="form-select" id="category" name="category">
-                  <option defaultValue={null}> Any Category </option>
-                  {categories.map((category) => <option key={category.id} value={category.id}>{ category.name }</option> )}
+            <form onSubmit={handleSubmit}>
+              {/* <div className="mb-3">
+                <label htmlFor="number-of-questions" className="form-label">
+                  Number of Questions:
+                </label>
+                <input
+                  type="number"
+                  min={1}
+                  max={50}
+                  name="amount"
+                  className="form-control"
+                  id="number-of-questions"
+                  value={formData.amount}
+                  onChange={handleChange}
+                />
+              </div> */}
+              <div className="mb-3">
+                <label htmlFor="category" className="form-label">
+                  Select Category:
+                </label>
+                <select className="form-select" id="category" name="category" value={formData.category} onChange={handleChange}>
+                  <option value=''> Any Category </option>
+                  {categories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
                 </select>
-              }
-              {/* <select className="form-select" id="category">
-                <option>Any Category</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option> 
-              </select> */} 
-            </div>
-            <div className="mb-3">
-              <label htmlFor="difficulty" className="form-label">Select Difficulty :</label>
-              <select className="form-select" id="difficulty">
-                <option defaultValue={null}>Any Difficulty</option>
-                <option value="easy">Easy</option>
-                <option value="meduim">Meduim</option>
-                <option value="hard">Hard</option>
-              </select>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="type" className="form-label">Select Type :</label>
-              <select className="form-select" id="type" name="type">
-                <option defaultValue={null}>Any Type</option>
-                <option value="multiple">Multiple Choice</option>
-                <option value="boolean">True / False</option>
-              </select>
-            </div>
-            
-            <button type="submit" className="btn btn-outline-primary">Submit</button>
-          </form>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="difficulty" className="form-label">
+                  Select Difficulty:
+                </label>
+                <select className="form-select" id="difficulty" name="difficulty" value={formData.difficulty} onChange={handleChange}>
+                  <option value=''>Any Difficulty</option>
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="hard">Hard</option>
+                </select>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="type" className="form-label">
+                  Select Type:
+                </label>
+                <select className="form-select" id="type" name="type" value={formData.type} onChange={handleChange}>
+                  <option value=''>Any Type</option>
+                  <option value="multiple">Multiple Choice</option>
+                  <option value="boolean">True / False</option>
+                </select>
+              </div>
+              
+              <button type="submit" className="btn btn-outline-primary">
+                Submit
+              </button>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  )
-
-}
+  );
+};
 
 export default Configuration;
