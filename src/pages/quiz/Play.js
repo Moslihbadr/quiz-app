@@ -5,17 +5,39 @@ const Play = ({ API }) => {
   const [ allQuestions, setAllQuestions ] = useState([])
   const [ currentQuestionIndex, setCurrentQuestionIndex ] = useState(0)
   const [ score, setScore ] = useState(0)
+  const [ correctAnswer, setCorrectAnswer ] = useState('')
 
-  useEffect(() => {
-    fetch(API)
-      .then((response) => response.json())
-      .then(data => setAllQuestions(data.results))
-  }, [API])
+useEffect(() => {
+  fetch(API)
+    .then((response) => response.json())
+    .then(data => setAllQuestions(data.results));
+}, [API]);
 
-  const handleNext = () => {
-    setCurrentQuestionIndex(prevState => prevState + 1)
+useEffect(() => {
+  if (allQuestions.length > 0) {
+    setCorrectAnswer(allQuestions[currentQuestionIndex]?.correct_answer)
   }
-  
+}, [allQuestions, currentQuestionIndex])
+
+
+  const handleNext = (event) => {
+    setCurrentQuestionIndex(prevState => prevState + 1)
+
+    const selectedAnswer = event.target.textContent
+
+    if (selectedAnswer === correctAnswer) {
+      setScore(prevScore => prevScore + 5)
+    }
+
+  }
+
+  // Shuffle array function
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
 
   return (
     <div className="play d-flex flex-column justify-content-center align-items-center">
@@ -23,6 +45,8 @@ const Play = ({ API }) => {
 
         // Merging the incorrect answers and the correct answer
         const answers = [ ...question.incorrect_answers, question.correct_answer ]
+
+        shuffleArray(answers)
 
         return (
           index === currentQuestionIndex &&
@@ -35,7 +59,7 @@ const Play = ({ API }) => {
               <div className="card-body px-2 pt-4">
                 <h1 className="text-center mt-3 mb-4" dangerouslySetInnerHTML={{ __html: question.question }} />
                 {
-                  answers.map((q, index) => <button key={index} onClick={handleNext} className="btn btn-outline-primary my-1 w-100">{q}</button>)
+                  answers.map((q, index) => <button key={index} onClick={handleNext} className="btn btn-outline-primary my-1 w-100" dangerouslySetInnerHTML={{ __html: q }}></button>)
                 }
               </div>
             </div>
@@ -43,7 +67,6 @@ const Play = ({ API }) => {
         )
       }
       )}
-      {/* <button onClick={handleNext}>next</button> */}
     </div>
   );
   
