@@ -48,7 +48,7 @@ const Configuration = ({ setAPI }) => {
     }
 
   return (
-    <div className="configuration mt-5">
+    <div className="configuration mt-5 pt-5">
       <div className="d-flex flex-column align-items-center justify-content-center">
         <h1 className="text-center mb-4">Quiz Configuration</h1>
         <div className="card mx-auto bg-transparent">

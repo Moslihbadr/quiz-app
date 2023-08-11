@@ -13,10 +13,10 @@ body {
 
 .Home, 
 .quiz
-.configuration {
+.configuration,
+.play {
   width: 100%;
   min-height: 100vh;
-  height: fit-content;
 }
 
 .card {
