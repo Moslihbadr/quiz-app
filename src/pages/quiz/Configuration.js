@@ -54,21 +54,6 @@ const Configuration = ({ setAPI }) => {
         <div className="card mx-auto bg-transparent">
           <div className="card-body">
             <form onSubmit={handleSubmit}>
-              {/* <div className="mb-3">
-                <label htmlFor="number-of-questions" className="form-label">
-                  Number of Questions:
-                </label>
-                <input
-                  type="number"
-                  min={1}
-                  max={50}
-                  name="amount"
-                  className="form-control"
-                  id="number-of-questions"
-                  value={formData.amount}
-                  onChange={handleChange}
-                />
-              </div> */}
               <div className="mb-3">
                 <label htmlFor="category" className="form-label">
                   Select Category:
