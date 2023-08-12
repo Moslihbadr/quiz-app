@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import FinaleScore from "./FinaleScore";
 
 const Play = ({ API }) => {
 
@@ -69,31 +69,7 @@ const Play = ({ API }) => {
         )
       })}
       {allQuestionsAnswered && (
-        <div className="card bg-transparent text-center">
-          <h1 className="mb-5" style={{fontSize:'2.5em'}}>Congratulations!</h1>
-          <h3 className="lead mb-4">Your final score is: <span className="fw-bold">{score}</span></h3>
-          <form className="d-flex justify-content-center align-items-baseline my-3  ">
-            <div className="mb-3 text-start px-1">
-              {/* <label htmlFor="username" className="form-label ms-1">
-                Your Name :
-              </label> */}
-              <input
-                type="text"
-                min={1}
-                max={50}
-                name="amount"
-                className="form-control bg-transparent"
-                id="username"
-                placeholder="Your Name"
-                // value={formData.amount}
-                // onChange={handleChange}
-              />
-            </div>
-            <button className="btn btn-primary mb-3 text-start">Save</button>
-          </form>
-          <Link to={'/'} className="btn btn-outline-primary w-75 m-auto my-1">Home</Link>
-          <Link to={'/quiz/configuration'} className="btn btn-outline-primary w-75 m-auto my-1">Play Again</Link>
-        </div>
+        <FinaleScore score={score} />
       )}
     </div>
   );
