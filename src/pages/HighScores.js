@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 const HighScores = ({ savedScore }) => {
 
@@ -64,6 +65,15 @@ const HighScores = ({ savedScore }) => {
                 ))}
               </tbody>
             </table>
+            <Link to={"/"} className="btn btn-outline-primary me-2 mt-3">
+              Home
+            </Link>
+            <Link
+              to={"/quiz/configuration"}
+              className="btn btn-outline-primary me-2 mt-3"
+            >
+              Play Again
+            </Link>
           </>
         ) : (
           <h2 className="text-center mt-4">No scores saved</h2>
