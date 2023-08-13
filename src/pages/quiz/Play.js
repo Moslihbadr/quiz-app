@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FinaleScore from "./FinaleScore";
 
-const Play = ({ API }) => {
+const Play = ({ API, setSavedScore }) => {
 
   const [ allQuestions, setAllQuestions ] = useState([])
   const [ currentQuestionIndex, setCurrentQuestionIndex ] = useState(0)
@@ -42,7 +42,7 @@ const Play = ({ API }) => {
   const allQuestionsAnswered = currentQuestionIndex === allQuestions.length;
 
   return (
-    <div className="play d-flex flex-column justify-content-center align-items-center">
+    <div className="play d-flex flex-column justify-content-center align-items-center" style={{height:'100vh'}}>
       {allQuestions.map((question, index) => {
 
         // Merging the incorrect answers and the correct answer
@@ -69,7 +69,7 @@ const Play = ({ API }) => {
         )
       })}
       {allQuestionsAnswered && (
-        <FinaleScore score={score} />
+        <FinaleScore score={score} setSavedScore={setSavedScore} />
       )}
     </div>
   );

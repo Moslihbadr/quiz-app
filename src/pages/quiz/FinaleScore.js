@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
 
-const FinaleScore = ({ score }) => {
-  const [savedScore, setSavedScore] = useState({
-    username: "",
-    score: "",
-  })
+const FinaleScore = ({ score, setSavedScore }) => {
+
   const [username, setUsername] = useState("")
   const [isUsernameValid, setUsernameValid] = useState(true)
 
@@ -31,7 +28,7 @@ const FinaleScore = ({ score }) => {
   }
 
   return (
-    <div className="card bg-transparent text-center">
+    <div className="card bg-transparent text-center" style={{height:'100vh'}}>
       <h1 className="mb-5" style={{ fontSize: "2.5em" }}>
         Congratulations!
       </h1>

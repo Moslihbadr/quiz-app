@@ -8,15 +8,16 @@ body {
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(to bottom, rgba(0,212,255,0.6783088235294117), rgba(178,6,200,0.5354516806722689));
+  background: linear-gradient(to bottom, rgba(0,212,255,0.6), rgba(178,6,200,0.5));
 }
 
 .Home, 
-.quiz
+.quiz,
 .configuration,
-.play {
+.play,
+.high-scores {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .card {
@@ -27,6 +28,10 @@ body {
 .card .card-body input,
 .card .card-body select {
   background-color: transparent;
+}
+
+th, td {
+  background-color: transparent!important;
 }
 
 @media screen and (max-width: 400px) {

@@ -17,7 +17,11 @@ import { useState } from "react";
 
 const  App = () => {
 
-  const [ API, setAPI ] = useState('');
+  const [ API, setAPI ] = useState('')
+  const [savedScore, setSavedScore] = useState({
+    username: "",
+    score: "",
+  })
   
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -25,9 +29,9 @@ const  App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/quiz" element={<QuizLayout />}>
           <Route path="Configuration" element={<Configuration setAPI={setAPI} />} />
-          <Route path="play" element={<Play API={API} />} />
+          <Route path="play" element={<Play API={API} setSavedScore={setSavedScore} />} />
         </Route>
-        <Route path="/highscores" element={<HighScores />} />
+        <Route path="/highscores" element={<HighScores savedScore={savedScore} />} />
       </Route>
     )
   )
